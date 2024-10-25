@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información del Estudiante</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #d7dbdd;
+            font-family: Arial, sans-serif;
+            position: relative;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #e5e7e9;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #2874a6;
+            margin-bottom: 20px;
+        }
+
+        .cerrar-sesion {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            background-color: #2874a6;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+        }
+
+        ul li {
+            padding: 10px 0;
+            border-bottom: 1px solid #ccc;
+            font-size: 18px;
+        }
+
+        ul li:last-child {
+            border-bottom: none;
+        }
+
+        strong {
+            color: #2874a6;
+        }
+
+        .alert {
+            color: #856404;
+            background-color: #fff3cd;
+            border-color: #ffeeba;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Icono de cerrar sesión -->
+    <a href="/estudiantesLogin" class="cerrar-sesion">
+        <img src="/img/cerrar.png" alt="Cerrar Sesión" width="30" height="30">
+    </a>
+
+    <div class="container">
+        <h1>Información del Estudiante</h1>
+
+        <div th:if="${estudiante != null}" class="card shadow p-4">
+            <h4 class="mb-3">Datos Personales</h4>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Correo Electrónico:</strong> [[${estudiante.correoElectronico}]]</li>
+                <li class="list-group-item"><strong>Tipo de Documento:</strong> [[${estudiante.tipoDocumento}]]</li>
+                <li class="list-group-item"><strong>Número de Documento:</strong> [[${estudiante.numeroDocumento}]]</li>
+                <li class="list-group-item"><strong>Nombre Completo:</strong> [[${estudiante.primerNombre}]] [[${estudiante.segundoNombre}]] [[${estudiante.primerApellido}]] [[${estudiante.segundoApellido}]]</li>
+                <li class="list-group-item"><strong>Número Telefónico:</strong> [[${estudiante.numeroTelefonico}]]</li>
+                <li class="list-group-item"><strong>Número de Registro:</strong> [[${estudiante.numeroRegistro}]]</li>
+                <li class="list-group-item"><strong>Estado (Aprobado/Reprobado):</strong> [[${estudiante.aprobadoReprobadoUTS}]]</li>
+            </ul>
+        </div>
+
+        <div th:if="${estudiante == null}" class="alert mt-4">
+            <p>No se encontró información del estudiante.</p>
+        </div>
+
+        <!-- Botón para ver los puntajes en otra página -->
+        <a th:href="@{/VerEstudianteNivel(correoElectronico=${estudiante.correoElectronico}, numeroDocumento=${estudiante.numeroDocumento})}" class="btn">Ver Puntajes</a>
+    </div>
+
+</body>
+</html>

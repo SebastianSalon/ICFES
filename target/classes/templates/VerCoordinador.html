@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Estudiantes</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #d7dbdd; /* Color de fondo similar al login */
+            font-family: Arial, sans-serif;
+        }
+
+        .table-container {
+            margin-top: 50px;
+        }
+
+        .table {
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+            width: 100%; 
+        }
+
+        .table th, .table td {
+            word-wrap: break-word; 
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .actions img {
+            width: 25px; /* Tamaño de los íconos */
+            margin: 0 5px; /* Espaciado entre los íconos */
+            cursor: pointer;
+        }
+
+        .actions a {
+            text-decoration: none; /* Quitar subrayado */
+        }
+
+        .top-right {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .top-right img {
+            width: 30px;
+            cursor: pointer;
+        }
+
+        .add-student {
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .table th {
+            background-color: #2874a6;
+            color: white;
+        }
+
+        h2 {
+            color: #2874a6;
+        }
+
+        .btn-image {
+            background-color: transparent;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Botón para cerrar sesión con icono -->
+    <div class="top-right">
+        <a href="/coordinadorLogin">
+            <img src="/img/cerrar.png" alt="Cerrar Sesión">
+        </a>
+    </div>
+
+    <div class="container-fluid table-container">
+        <h2 class="text-center mb-4">Registro de Estudiantes ICFES</h2>
+
+        <!-- Botón para agregar un nuevo estudiante reemplazado por una imagen -->
+        <div class="mb-3 text-left">
+            <a href="/agregarEstudiante" class="add-student">
+                <img src="/img/agre.png" alt="Agregar Estudiante" width="40"> <!-- Tamaño ajustado a 40px -->
+            </a>
+        </div>
+
+        <!-- Tabla que ocupa todo el ancho sin desbordar -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover w-100">
+                <thead class="thead-dark text-center">
+                    <tr>
+                        <!-- El campo ID ya no se muestra -->
+                        <th>Tipo Documento</th>
+                        <th>Número Documento</th>
+                        <th>Primer Apellido</th>
+                        <th>Segundo Apellido</th>
+                        <th>Primer Nombre</th>
+                        <th>Segundo Nombre</th>
+                        <th>Correo Electrónico</th>
+                        <th>Número Telefónico</th>
+                        <th>Número Registro</th>
+                        <th>Puntaje</th>
+                        <th>Aprobado/Reprobado UTS</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí se iteran todos los estudiantes para mostrar cada fila -->
+                    <tr th:each="estudiante : ${estudiantes}" class="text-center">
+                        <!-- El ID sigue presente en los enlaces para las acciones, pero no se muestra en la tabla -->
+                        <td th:text="${estudiante.tipoDocumento}"></td>
+                        <td th:text="${estudiante.numeroDocumento}"></td>
+                        <td th:text="${estudiante.primerApellido}"></td>
+                        <td th:text="${estudiante.segundoApellido}"></td>
+                        <td th:text="${estudiante.primerNombre}"></td>
+                        <td th:text="${estudiante.segundoNombre}"></td>
+                        <td th:text="${estudiante.correoElectronico}"></td>
+                        <td th:text="${estudiante.numeroTelefonico}"></td>
+                        <td th:text="${estudiante.numeroRegistro}"></td>
+                        <td th:text="${estudiante.puntaje}"></td>
+                        <td th:text="${estudiante.aprobadoReprobadoUTS}"></td>
+                        <td class="actions">
+                            <!-- Icono para editar al estudiante -->
+                            <a th:href="@{'/editarEstudiante/' + ${estudiante.id}}">
+                                <img src="/img/edi.png" alt="Editar">
+                            </a>
+                            
+                            <!-- Icono para eliminar al estudiante -->
+                            <a th:href="@{'/eliminarEstudiante/' + ${estudiante.id}}"
+                               onclick="return confirm('¿Seguro de que desea eliminar a este estudiante?');">
+                                <img src="/img/eli.png" alt="Eliminar">
+                            </a>
+                            
+                            <!-- Icono para ver al estudiante -->
+                            <a th:href="@{'/verEstudiante/' + ${estudiante.id}}">
+                                <img src="/img/ver.png" alt="Ver">
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
