@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Coordinador</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #d7dbdd;
+            font-family: Arial, sans-serif;
+        }
+
+        h2 {
+            color: #2874a6;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: #2874a6;
+            border-color: #2874a6;
+        }
+
+        .btn-primary:hover {
+            background-color: #1a5276;
+            border-color: #1a5276;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container form-container">
+        <h2 class="mb-4">Agregar Estudiante</h2>
+
+        <form th:action="@{/guardarEstudiante}" th:object="${estudiante}" method="post">
+            <input type="hidden" th:field="*{id}" />
+			
+			<div class="form-group">
+			    <label for="_id">ID:</label>
+			    <input type="text" class="form-control" id="_id" th:field="*{id}" placeholder="Ingrese un ID personalizado o deje en blanco">
+			</div>
+
+            <div class="form-group">
+                <label for="tipoDocumento">Tipo de Documento:</label>
+                <select class="form-control" id="tipoDocumento" th:field="*{tipoDocumento}" required>
+                    <option value="CC" th:selected="*{tipoDocumento == 'CC'}">CC</option>
+                    <option value="TI" th:selected="*{tipoDocumento == 'TI'}">TI</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="numeroDocumento">Número de Documento:</label>
+                <input type="text" class="form-control" id="numeroDocumento" th:field="*{numeroDocumento}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="primerApellido">Primer Apellido:</label>
+                <input type="text" class="form-control" id="primerApellido" th:field="*{primerApellido}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="segundoApellido">Segundo Apellido:</label>
+                <input type="text" class="form-control" id="segundoApellido" th:field="*{segundoApellido}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="primerNombre">Primer Nombre:</label>
+                <input type="text" class="form-control" id="primerNombre" th:field="*{primerNombre}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="segundoNombre">Segundo Nombre:</label>
+                <input type="text" class="form-control" id="segundoNombre" th:field="*{segundoNombre}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="correoElectronico">Correo Electrónico:</label>
+                <input type="email" class="form-control" id="correoElectronico" th:field="*{correoElectronico}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="numeroTelefonico">Número Telefónico:</label>
+                <input type="text" class="form-control" id="numeroTelefonico" th:field="*{numeroTelefonico}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="numeroRegistro">Número de Registro:</label>
+                <input type="text" class="form-control" id="numeroRegistro" th:field="*{numeroRegistro}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="puntaje">Puntaje:</label>
+                <input type="number" class="form-control" id="puntaje" th:field="*{puntaje}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="aprobadoReprobadoUTS">Aprobado/Reprobado UTS:</label>
+                <select class="form-control" id="aprobadoReprobadoUTS" th:field="*{aprobadoReprobadoUTS}" required>
+                    <option value="Aprobado">Aprobado</option>
+                    <option value="Reprobado">Reprobado</option>
+                    <option value="Anulado">Anulado</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="comunicacionEscrita">Comunicación Escrita:</label>
+                <input type="number" class="form-control" id="comunicacionEscrita" th:field="*{comunicacionEscrita}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="razonamientoCuantitativo">Razonamiento Cuantitativo:</label>
+                <input type="number" class="form-control" id="razonamientoCuantitativo" th:field="*{razonamientoCuantitativo}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="lecturaCritica">Lectura Crítica:</label>
+                <input type="number" class="form-control" id="lecturaCritica" th:field="*{lecturaCritica}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="competenciasCiudadanas">Competencias Ciudadanas:</label>
+                <input type="number" class="form-control" id="competenciasCiudadanas" th:field="*{competenciasCiudadanas}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="ingles">Inglés:</label>
+                <input type="number" class="form-control" id="ingles" th:field="*{ingles}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="formulacionProyectosIngenieria">Formulación de Proyectos en Ingeniería:</label>
+                <input type="number" class="form-control" id="formulacionProyectosIngenieria" th:field="*{formulacionProyectosIngenieria}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="pensamientoCientificoMatematicasEstadistica">Pensamiento Científico, Matemáticas y Estadística:</label>
+                <input type="number" class="form-control" id="pensamientoCientificoMatematicasEstadistica" th:field="*{pensamientoCientificoMatematicasEstadistica}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="disenoSoftware">Diseño de Software:</label>
+                <input type="number" class="form-control" id="disenoSoftware" th:field="*{disenoSoftware}" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Guardar Estudiante</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('puntaje').addEventListener('input', function () {
+            let puntaje = parseInt(this.value);
+            let aprobadoReprobadoUTS = document.getElementById('aprobadoReprobadoUTS');
+
+            if (puntaje === 0) {
+                aprobadoReprobadoUTS.value = 'Anulado';
+                setAllScoresToZero();
+            } else if (puntaje > 0 && puntaje <= 125) {
+                aprobadoReprobadoUTS.value = 'Reprobado';
+            } else if (puntaje > 125) {
+                aprobadoReprobadoUTS.value = 'Aprobado';
+            }
+        });
+
+        function setAllScoresToZero() {
+            document.getElementById('comunicacionEscrita').value = 0;
+            document.getElementById('razonamientoCuantitativo').value = 0;
+            document.getElementById('lecturaCritica').value = 0;
+            document.getElementById('competenciasCiudadanas').value = 0;
+            document.getElementById('ingles').value = 0;
+            document.getElementById('formulacionProyectosIngenieria').value = 0;
+            document.getElementById('pensamientoCientificoMatematicasEstadistica').value = 0;
+            document.getElementById('disenoSoftware').value = 0;
+        }
+    </script>
+</body>
+</html>
